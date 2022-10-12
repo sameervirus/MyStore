@@ -1,0 +1,88 @@
+<div class="mx-auto max-w-7xl px-4 sm:px-6">
+  <main *ngIf="product" class="w-full flex flex-col lg:flex-row">
+    <!-- Gallery -->
+    <section
+      class="h-fit flex-col gap-8 mt-4 sm:flex sm:flex-row sm:gap-4 sm:h-full sm:mt-6 sm:mx-2 md:gap-8 md:mx-4 lg:flex-col lg:mx-0 lg:mt-12"
+    >
+      <picture class="relative flex items-center bg-orange sm:bg-transparent">
+        <img
+          [src]="product.url"
+          alt="sneaker"
+          class="block sm:rounded-xl xl:w-[60%] xl:rounded-xl m-auto pointer-events-none transition duration-300 lg:w-3/4 lg:pointer-events-auto lg:cursor-pointer lg:hover:shadow-xl"
+          id="hero"
+        />
+      </picture>
+    </section>
+
+    <!-- Text -->
+    <section class="w-full p-6 lg:mt-12 lg:pr-20 lg:py-10 2xl:pr-40 2xl:mt-10">
+      <h1 class="text-very-dark mb-4 font-bold text-3xl lg:text-4xl">
+        {{ product.name }}
+      </h1>
+      <p class="text-dark-grayish mb-6 text-base sm:text-lg">
+        {{ product.description }}
+      </p>
+
+      <div
+        class="flex items-center justify-between mb-6 sm:flex-col sm:items-start"
+      >
+        <div class="flex items-center gap-4">
+          <h3 class="text-very-dark font-bold text-3xl inline-block">
+            {{ product.price }} L.E.
+          </h3>
+        </div>
+      </div>
+      <figcaption class="font-medium">
+        <div class="flex flex-col gap-5 mb-16 sm:flex-row lg:mb-0">
+          <select
+            #qty
+            id="qty"
+            class="mr-2 bg-gray-50 border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white focus:border-blue-500 focus:ring-blue-500 p-2.5 text-gray-900"
+          >
+            <option
+              *ngFor="let item of [].constructor(10); let i = index"
+              [value]="i + 1"
+            >
+              {{ i + 1 }}
+            </option>
+          </select>
+          <button
+            (click)="addToCart(product, qty.value)"
+            type="button"
+            class="text-white bg-blue-700 hover:bg-blue-800 font-medium text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          >
+            <svg
+              aria-hidden="true"
+              class="mr-2 -ml-1 w-5 h-5"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"
+              ></path>
+            </svg>
+            Add to cart
+          </button>
+        </div>
+      </figcaption>
+      <a routerLink="/" class="flex mt-6 cursor-pointer"
+        ><svg
+          class="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M7 16l-4-4m0 0l4-4m-4 4h18"
+          ></path>
+        </svg>
+        Back to products List</a
+      >
+    </section>
+  </main>
+</div>

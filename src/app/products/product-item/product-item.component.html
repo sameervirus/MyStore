@@ -1,29 +1,38 @@
-<figure class="md:flex bg-slate-100 rounded-xl pb-4 md:p-0">
-  <img
-    class="w-auto h-auto md:w-48 md:h-auto"
-    [src]="product.url"
-    alt=""
-    width="384"
-    height="512"
-  />
+<figure class="md:flex bg-slate-100 pb-4 md:p-0">
+  <a class="curser-pointer" routerLink="product/{{ product.id }}">
+    <img
+      class="w-auto h-auto md:w-48 md:h-auto"
+      [src]="product.url"
+      alt=""
+      width="384"
+      height="512"
+    />
+  </a>
   <div
     class="pt-6 md:flex md:flex-col md:justify-between md:p-8 text-center md:text-left space-y-4"
   >
-    <h3 class="font-bold text-2xl">{{ product.name }}</h3>
+    <a class="curser-pointer" routerLink="product/{{ product.id }}"
+      ><h3 class="font-bold text-2xl">{{ product.name }}</h3></a
+    >
     <blockquote>
-      <p class="text-lg font-medium">
-        {{ product.description }}
-      </p>
+      <p class="text-lg font-medium">Price: {{ product.price }} L.E.</p>
     </blockquote>
     <figcaption class="font-medium">
       <div class="flex justify-center">
-        <input
-          type="number"
+        <select
+          #qty
           id="qty"
-          class="w-24 text-center bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          required
-        />
+          class="mr-2 bg-gray-50 border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white focus:border-blue-500 focus:ring-blue-500 p-2.5 text-gray-900"
+        >
+          <option
+            *ngFor="let item of [].constructor(10); let i = index"
+            [value]="i + 1"
+          >
+            {{ i + 1 }}
+          </option>
+        </select>
         <button
+          (click)="addToCart(product, qty.value)"
           type="button"
           class="text-white bg-blue-700 hover:bg-blue-800 font-medium text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         >
@@ -38,7 +47,7 @@
               d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"
             ></path>
           </svg>
-          Buy now
+          Add to cart
         </button>
       </div>
     </figcaption>
