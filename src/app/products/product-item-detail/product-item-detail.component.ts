@@ -35,7 +35,7 @@ export class ProductItemDetailComponent implements OnInit {
 
   addToCart(product: Product, qty: string) {
     if (product && qty && Number(qty) > 0) {
-      this.productServices.addToCart(product.id, qty);
+      this.productServices.addToCart(product, qty);
     } else {
       alert('You must select a product');
     }

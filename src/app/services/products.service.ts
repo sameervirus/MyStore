@@ -13,18 +13,18 @@ export class ProductsService {
     return this.http.get<Product[]>('../../assets/data.js');
   }
 
-  addToCart(id: number, qty: string) {
-    console.log();
+  addToCart(product: Product, qty: string) {
     const storage = localStorage.getItem('cart');
     let cart = storage ? JSON.parse(storage) : [];
-    let product;
-    if (cart && cart.length > 0)
-      product = cart.filter((el: any) => el.id === id)[0];
+    let item;
 
-    if (product) {
-      product.qty = Number(product.qty) + Number(qty);
+    if (cart && cart.length > 0)
+      item = cart.filter((el: any) => el.product.id === product.id)[0];
+
+    if (item) {
+      item.qty = Number(item.qty) + Number(qty);
     } else {
-      cart.push({ id: id, qty: qty });
+      cart.push({ product: product, qty: qty });
     }
     alert('Item added to cart sucessfully');
     localStorage.setItem('cart', JSON.stringify(cart));

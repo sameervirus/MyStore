@@ -1,0 +1,93 @@
+<h1 class="font-semibold text-2xl border-b pb-8">Order Summary</h1>
+<div class="flex justify-between mt-10 mb-5">
+  <span class="font-semibold text-sm uppercase">Items {{ totalOrder[0] }}</span>
+  <span class="font-semibold text-sm">{{ totalOrder[1] }} L.E</span>
+</div>
+<form #clientForm="ngForm" (ngSubmit)="checkout()">
+  <div class="py-2">
+    <label for="name" class="font-semibold inline-block mb-1 text-sm uppercase"
+      >Full name</label
+    >
+    <input
+      [(ngModel)]="client.name"
+      name="name"
+      minlength="3"
+      maxlength="255"
+      required
+      type="text"
+      id="name"
+      #name="ngModel"
+      placeholder="Enter your name"
+      class="border p-2 text-sm w-full"
+    />
+    <p
+      *ngIf="name.dirty && name.invalid"
+      class="mt-2 text-sm text-red-600 dark:text-red-500"
+    >
+      Minimum 3 letters and maximum 255 letters
+    </p>
+  </div>
+  <div class="py-2">
+    <label
+      for="address"
+      class="font-semibold inline-block mb-1 text-sm uppercase"
+      >Address</label
+    >
+    <input
+      [(ngModel)]="client.address"
+      name="address"
+      required
+      minlength="6"
+      type="text"
+      id="address"
+      #address="ngModel"
+      placeholder="Enter your full address"
+      class="border p-2 text-sm w-full"
+    />
+    <p
+      *ngIf="address.dirty && address.invalid"
+      class="mt-2 text-sm text-red-600 dark:text-red-500"
+    >
+      Minimum 6 letters
+    </p>
+  </div>
+  <div class="py-2">
+    <label
+      for="creditCard"
+      class="font-semibold inline-block mb-1 text-sm uppercase"
+      >Credit card</label
+    >
+    <input
+      [(ngModel)]="client.creditCard"
+      name="creditCard"
+      pattern="[0-9]*"
+      required
+      type="text"
+      minlength="16"
+      maxlength="16"
+      id="creditCard"
+      #creditCard="ngModel"
+      placeholder="Enter your Credit card"
+      class="border p-2 text-sm w-full"
+    />
+    <p
+      *ngIf="creditCard.dirty && creditCard.invalid"
+      class="mt-2 text-sm text-red-600 dark:text-red-500"
+    >
+      Only numbers allowed! and 16 numbers
+    </p>
+  </div>
+
+  <div class="border-t mt-8">
+    <div class="flex font-semibold justify-between py-6 text-sm uppercase">
+      <span>Total cost</span>
+      <span>{{ totalOrder[1] }} L.E</span>
+    </div>
+    <button
+      [disabled]="clientForm.invalid"
+      class="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full"
+    >
+      Checkout
+    </button>
+  </div>
+</form>
