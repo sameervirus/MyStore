@@ -26,7 +26,7 @@ export class ProductsService {
     } else {
       cart.push({ product: product, qty: qty });
     }
-    alert('Item added to cart sucessfully');
+    alert(`Your ${product.name} added to cart sucessfully`);
     localStorage.setItem('cart', JSON.stringify(cart));
   }
 }

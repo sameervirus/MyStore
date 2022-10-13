@@ -11,7 +11,6 @@ import { Product } from '../models/Product';
 export class CartComponent implements OnInit {
   products: Product[] = [];
   cartitems: CartItem[] = [];
-  hasCheckout: boolean = false;
   client: any;
   totalQuantity: number = 0;
   totalPrice: number = 0.0;
@@ -67,16 +66,14 @@ export class CartComponent implements OnInit {
   }
 
   checkout(client: any) {
-    const order = [
-      {
-        client: client,
-        products: this.cartitems,
-        quantity: this.totalQuantity,
-        price: this.totalPrice,
-      },
-    ];
+    const order = {
+      client: client,
+      products: this.cartitems,
+      quantity: this.totalQuantity,
+      price: this.totalPrice.toFixed(2),
+    };
     localStorage.removeItem('cart');
-    localStorage.setItem('order_' + Date.now(), JSON.stringify(order));
+    localStorage.setItem('order', JSON.stringify(order));
     this.router.navigateByUrl('/confirmation');
   }
 }
