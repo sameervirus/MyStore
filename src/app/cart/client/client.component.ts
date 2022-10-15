@@ -22,4 +22,8 @@ export class ClientComponent implements OnInit {
   checkout() {
     this.checkouted.emit(this.client);
   }
+
+  creditCardChanged($event: any): void {
+    if (isNaN($event)) alert('Allow only numbers');
+  }
 }

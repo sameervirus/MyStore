@@ -6,10 +6,11 @@
 <form #clientForm="ngForm" (ngSubmit)="checkout()">
   <div class="py-2">
     <label for="name" class="font-semibold inline-block mb-1 text-sm uppercase"
-      >Full name</label
+      >Full Name: {{ client.name }}</label
     >
     <input
-      [(ngModel)]="client.name"
+      [ngModel]="client.name"
+      (ngModelChange)="client.name = $event"
       name="name"
       minlength="3"
       maxlength="255"
@@ -20,6 +21,7 @@
       placeholder="Enter your name"
       class="border p-2 text-sm w-full"
     />
+
     <p
       *ngIf="name.dirty && name.invalid"
       class="mt-2 text-sm text-red-600 dark:text-red-500"
@@ -58,7 +60,8 @@
       >Credit card</label
     >
     <input
-      [(ngModel)]="client.creditCard"
+      (ngModelChange)="creditCardChanged($event)"
+      [ngModel]="client.creditCard"
       name="creditCard"
       pattern="[0-9]*"
       required
