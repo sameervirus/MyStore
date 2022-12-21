@@ -24,4 +24,4 @@ jobs:
           server: ftp.visiongrp.net
           username: visiongrp
           password: ${{ secrets.password }}
-          server-dir: public_html/mystores/
+          server-dir: /public_html/mystores/
